@@ -8,6 +8,11 @@ Originally, I only needed the build tools because it was required by Flutter. I 
 
 Currently, this tool still doesn't achieve what it's intended to do, but I think some people might want to check it. It consumes much of my free time so I'm not sure if I can finish it (especially the file extraction part). PR(s) are always welcome and I will see what I can do to help.
 
+### Disclaimer
+- This tool is unofficial and there's no guarantee that everything will continue to work properly
+- By using this tool you agree that I'm not responsible for anything and you're ready to accept any risk
+- If something is broken, start looking at [Visual Studio Bootstrapper Docs](https://github.com/MicrosoftDocs/visualstudio-docs/blob/main/docs/install/command-line-parameter-examples.md) for initial reference
+
 ### Features
 - Ability to use specific build tools versions (e.g. `VS 2022`)
 - Customize workloads (e.g. `Desktop development with C++`, `.NET desktop development`)
@@ -17,10 +22,16 @@ Currently, this tool still doesn't achieve what it's intended to do, but I think
 - Download and verify files checksum (or just export the details as `csv` and `json`)
 - (TODO - need help) Extract downloaded files for possible portable installation
 
-### Disclaimer
-- This tool is unofficial and there's no guarantee that everything will continue to work properly
-- By using this tool you agree that I'm not responsible for anything and you're ready to accept any risk
-- If something is broken, start looking at [Visual Studio Bootstrapper Docs](https://github.com/MicrosoftDocs/visualstudio-docs/blob/main/docs/install/command-line-parameter-examples.md) for initial reference
+### Screenshots
+
+<details>
+    <summary>Show screenshots</summary>
+    <p align="center">
+        <img src="_docs/Screenshot_1.png"/>
+        <img src="_docs/Screenshot_2.png"/>
+        <img src="_docs/Screenshot_3.png"/>
+    </p>
+</details>
 
 ### License
 - BuildToolsInspector under [The Unlicense](LICENSE)
