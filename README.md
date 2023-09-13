@@ -22,14 +22,15 @@ Currently, this tool still doesn't achieve what it's intended to do, but I think
 - Remove unneeded packages or add packages that are not included in workloads
 - Check package types, total files, and download size
 - Download and verify files checksum (or just export the details as `csv` and `json`)
+- Extract downloaded files for portable installation (currently support `vsix` and Windows SDK)
 
 ### Todo
 |Status|Task|Comment|
 |-|-|-|
 |:white_check_mark:|Extract vsix files|There are some tiny vsix files that can't be extracted, but I think they're not important at all
-|:white_large_square:|Extract Windows SDK files|I have an idea how to implement it but kind of busy for now|
-|:white_large_square:|Set environment variables and registry keys|Should be easy to implement once the issue with Windows SDK is solved|
-|:white_large_square:|Compatibility with Flutter|May need to manipulate `%PROGRAMFILES(X86)%` (when launching Flutter/VS Code) and use `vswhere`. Will likely break current directory structures|
+|:white_check_mark:|Extract Windows SDK files|Done by temporarily installing Windows SDK|
+|:white_large_square:|Set environment variables and registry keys|To do later once I figure out how to trick Flutter|
+|:white_large_square:|Compatibility with Flutter|May need to manipulate `%PROGRAMFILES(X86)%` (when launching Flutter/VS Code) and use modified `vswhere`|
 |:white_large_square:|Use pure Python and remove external libraries|Not top priority, already possible to convert `ipynb` to `py`|
 
 ### Screenshots
