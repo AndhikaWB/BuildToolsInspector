@@ -2,8 +2,6 @@
 Portable packages inspector (and downloader) for VS Build Tools.
 
 ### Why Did I Make This?
-~~It all started when I was born...~~
-
 Originally, I only needed the build tools because it was required by Flutter. I don't like installing VS directly because of its size and the installation is not fully transparent (will mess up my file associations, require admin rights, etc). So I tried [PortableBuildTools](https://github.com/Data-Oriented-House/PortableBuildTools), but it still doesn't meet the Flutter requirement and doesn't have much customization. I checked the Flutter doctor source code to see what's wrong and it's [more complicated than I thought](https://github.com/flutter/flutter/blob/master/packages/flutter_tools/lib/src/windows/visual_studio.dart).
 
 Currently, this tool still doesn't achieve what it's intended to do, but I think some people might want to check it. It consumes much of my free time so I'm not sure if I can finish it (especially the file extraction part). PR(s) are always welcome and I will see what I can do to help.
@@ -29,7 +27,7 @@ Currently, this tool still doesn't achieve what it's intended to do, but I think
 |-|-|-|
 |:white_check_mark:|Extract vsix files|There are some tiny vsix files that can't be extracted, but I think they're not important at all
 |:white_check_mark:|Extract Windows SDK files|Done by temporarily installing Windows SDK|
-|:white_large_square:|Set environment variables and registry keys|To do later once I figure out how to trick Flutter|
+|:white_large_square:|Set environment variables and registry keys|Partially done (environment variables only), still need to figure out registry keys|
 |:white_large_square:|Compatibility with Flutter|May need to manipulate `%PROGRAMFILES(X86)%` (when launching Flutter/VS Code) and use modified `vswhere`|
 |:white_large_square:|Use pure Python and remove external libraries|Not top priority, already possible to convert `ipynb` to `py`|
 
