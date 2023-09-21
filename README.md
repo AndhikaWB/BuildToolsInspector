@@ -45,6 +45,11 @@ Originally, I only needed the build tools because it was required by Flutter. I 
     </p>
 </details>
 
+### Similar Projects
+- [Data-Oriented-House\PortableBuildTools](https://github.com/Data-Oriented-House/PortableBuildTools)
+- [mmozeiko\portable-msvc](https://gist.github.com/mmozeiko/7f3162ec2988e81e56d5c4e22cde9977)
+- [reksar\vsget](https://github.com/reksar/vsget)
+
 ### License
 - BuildToolsInspector under [The Unlicense](LICENSE)
 - VS Build Tools (2022) under [Microsoft License](https://go.microsoft.com/fwlink/?LinkId=2180117)
