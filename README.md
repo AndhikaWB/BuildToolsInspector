@@ -29,7 +29,8 @@ Originally, I only needed the build tools because it was required by Flutter. I 
 |:white_check_mark:|Extract vsix files|There are some tiny vsix files that can't be extracted, but I think they're not important at all
 |:white_check_mark:|Extract Windows SDK files|Done by temporarily installing Windows SDK|
 |:white_check_mark:|Set environment variables and registry keys|Done, as minimal as possible. There might be issues depending on how your software detect Visual Studio installation|
-|:white_check_mark:|Compatibility with Flutter and `vswhere`|Done, you may need to copy `vswhere` to `%PROGRAMFILES(X86)%\Microsoft Visual Studio\Installer` or overwrite `%PROGRAMFILES(X86)%` env var temporarily|
+|:warning:|Compatibility with Flutter|Flutter is able to recognize it, but fail when building with CMake. Possible to override `CMAKE_GENERATOR_INSTANCE` but I'm looking for a cleaner solution. Use `flutter run --verbose` to debug the build process|
+|:warning:|Compatibility with `vswhere`|Copy `vswhere` to `%PROGRAMFILES(X86)%\Microsoft Visual Studio\Installer`. The output is correct, but some tools like CMake will also use COM to detect VS instances. COM query is not supported yet and tbh I'm not familiar with it|
 |:white_large_square:|Linux support?|May need to use `pathlib` and change Windows SDK extract method. Even then, it may still be impossible to compile things correctly on Linux (missing dependencies, etc)|
 |:white_large_square:|Use pure Python and remove external libraries|Not top priority, already possible to convert `ipynb` to `py`. Will need to implement our own `CaseInsensitiveDict` or always use `lower`|
 
