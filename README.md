@@ -53,4 +53,4 @@ Originally, I only needed the build tools because it was required by Flutter. I 
 
 ### License
 - BuildToolsInspector under [The Unlicense](LICENSE)
-- VS Build Tools (2022) under [Microsoft License](https://go.microsoft.com/fwlink/?LinkId=2180117)
+- Visual Studio under [Microsoft License](https://visualstudio.microsoft.com/license-terms/)
