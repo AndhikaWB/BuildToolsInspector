@@ -20,7 +20,7 @@ Originally, I only needed the build tools because it is required by Flutter. I d
 - Remove unneeded packages or add packages that are not included in workloads
 - Check package types, total files, and download size
 - Download and verify files checksum (or just export the details as `csv` and `json`)
-- Extract downloaded files for portable installation (currently support `vsix` and Windows SDK)
+- Extract downloaded files for portable installation (currently support `vsix` and Windows SDK). Please modify `state.json` manually when moving root directory
 - Can be recognized by `vswhere` (will write some values to Windows registry)
 
 ### Todo
@@ -29,9 +29,9 @@ Originally, I only needed the build tools because it is required by Flutter. I d
 |:white_check_mark:|Extract vsix files|There are some tiny vsix files that can't be extracted (because there's nothing to extract?), but I think they're not important at all so it's safe to ignore
 |:white_check_mark:|Extract Windows SDK files|Currently done by temporarily installing Windows SDK (`WinSdkInstaller`)|
 |:white_check_mark:|Set environment variables and registry keys|Done, as minimal as possible. There might be issues depending on how your software detect Visual Studio installation|
-|:warning:|Compatibility with Flutter|Flutter is able to recognize it, but fail when building with CMake. Possible to override `CMAKE_GENERATOR_INSTANCE` but I'm looking for a cleaner solution. Use `flutter run --verbose` and check `CMakeConfigureLog.yaml` in case of error. It's also possible to change error verbosity by running CMake/MSBuild (with modified params) manually|
-|:warning:|Compatibility with `vswhere`|Copy `vswhere` to `%PROGRAMFILES(X86)%\Microsoft Visual Studio\Installer`. The output is correct, but some tools like CMake will also use COM to detect VS instances. COM query is not supported yet and tbh I'm not familiar with it|
-|:white_large_square:|Migrate to PowerShell and don't use `cmd` tools (`reg`, `setx`, etc)|`cmd` is very unpredictable. It doesn't support single quotes and has multiple escape characters (`%`, `\`, `^`). Path with spaces and backslash at the end of path may also break things. And if that's not enough, executed `bat` file may behave differently than when typing the commands on `cmd` directly|
+|:white_check_mark:|Compatibility with Flutter|Run `flutter clean`, `flutter run --verbose`, and check `CMakeConfigureLog.yaml` in case of error. It's also possible to change error verbosity by running CMake/MSBuild (with modified params) manually|
+|:white_check_mark:|Compatibility with `vswhere`|Will need to copy `vswhere` to `%PROGRAMFILES(X86)%\Microsoft Visual Studio\Installer`. It's recognized correctly, but some tools like CMake may also use multiple COM interfaces to detect VS instances. COM query is barely supported because I'm not familiar with it|
+|:white_large_square:|Migrate to PowerShell and don't use `cmd` tools (`reg`, `setx`, etc)|`cmd` is very unpredictable. It doesn't support single quotes and has multiple escape characters (`%`, `\`, `^`). Path with spaces and backslash at the end of path may also break things. And if that's not enough, the executed `bat` file may behave differently than when running the commands on `cmd` directly|
 |:white_large_square:|Linux support|May need to use `pathlib` and change Windows SDK extract method. Even then, it may still be impossible to compile things correctly on Linux (missing dependencies, etc)|
 |:white_large_square:|Use pure Python and remove external libraries|Not top priority, already possible to convert `ipynb` to `py`. Will need to implement our own `CaseInsensitiveDict` or always use `lower`|
 
