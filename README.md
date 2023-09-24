@@ -45,6 +45,7 @@ Originally, I only needed the build tools because it is required by Flutter. I d
         <img src="_docs/Screenshot_3.png"/>
         <img src="_docs/Screenshot_4.png"/>
         <img src="_docs/Screenshot_5.png"/>
+        <img src="_docs/Screenshot_6.png"/>
     </p>
 </details>
 
