@@ -1,47 +1,58 @@
-Manifest packages are a list of dict that is basically composed of these keys (and values):
+## Overview
+There are many variables scattered in BuildToolsInspector that can be modified to change the script (`main.ipynb`) behavior. The most important ones are written at the beginning of the script (`vs_package_download`, `vs_package_extract`, `install_path`, etc). While seemed simple, please be aware that those variables may also indirectly affect one another. For example, `vs_package_extract` obviously will not work if `vs_package_download` is set to false.
+
+When running the script, a data folder will be created to store some important files (e.g. `manifest.json`, `payloads.json`). You can inspect these files in case something breaks. However, modifying them usually will not affect the script (it only dumps files, but doesn't load them). The only exception is the manifest files (`channel_info.json` and `manifest.json`) which can be loaded locally to avoid redownloading every time the script is run. Other than data folder, there is also cache/packages folder. As the name implies, it stores downloaded packages in there.
+
+At the end of the script, environment variables and registry keys setup will also be created as `vs_env_setup.bat`, `vs_register.bat`, and `vs_unregister.bat`. You will need to run these files manually if you want to make it recognizable by CMake, [vswhere](https://github.com/microsoft/vswhere), or other similar tools. The register/unregister thingy must be run as admin as it will manipulate the `HKLM` registry branch. However, please review it before running because it will also break the non-portable VS instance(s). Some details have been explained [here](https://gist.github.com/mmozeiko/7f3162ec2988e81e56d5c4e22cde9977?permalink_comment_id=4688841#gistcomment-4688841) and [there](https://github.com/Data-Oriented-House/PortableBuildTools/issues/2#issuecomment-1732924904) (or just view the script source code directly).
+
+## Packages
+Packages in `manifest.json` are basically a dict list that are composed of keys and values below. It is quite important to know because broken things will likely be caused by mishandled packages.
 
 ```jsonc
-{
-    "id": "example.package.id",
-    "version": "1.0.0.0",
-    "type": "Component",
-    "chip": "neutral",
-    "language": "neutral",
-    "productArch": "neutral",
-    "machineArch": "neutral",
-    "payloads": [
-        {
-            "fileName": "example.file.name.msi",
-            "sha256": "d01n33dt03xpl41nth1s...",
-            "size": 12345,
-            "url": "https://example.com/example.file.name.msi"
+[
+    {
+        "id": "example.package.id",
+        "version": "1.0.0.0",
+        "type": "Component",
+        "chip": "neutral",
+        "language": "neutral",
+        "productArch": "neutral",
+        "machineArch": "neutral",
+        "payloads": [
+            {
+                "fileName": "example.file.name.msi",
+                "sha256": "d01n33dt03xpl41nth1s...",
+                "size": 12345,
+                "url": "https://example.com/example.file.name.msi"
+            },
+            // Other payloads...
+        ],
+        "dependencies": {
+            "other.example.package.id": "[1.0,2.0)",
+            "another.example.package.id": {
+                "version": "[1.0,2.0)",
+                "chip": "x64"
+            },
+            "yet.another.example.package.id_12345": {
+                "id": "yet.another.example.package.id",
+                "version": "[1.0,2.0)",
+                "chip": "x64",
+                "language": "en-US",
+                "machineArch": "x64",
+                "when": [
+                    "Microsoft.VisualStudio.Product.BuildTools",
+                    // Other product ids...
+                ]
+            },
+            // Other dependencies...
         },
-        // ...
-    ],
-    "dependencies": {
-        "other.example.package.id": "[1.0,2.0)",
-        "another.example.package.id": {
-            "version": "[1.0,2.0)",
-            "chip": "x64"
-        },
-        "yet.another.example.package.id_12345": {
-            "id": "yet.another.example.package.id",
-            "version": "[1.0,2.0)",
-            "chip": "x64",
-            "language": "en-US",
-            "machineArch": "x64",
-            "when": [
-                "Microsoft.VisualStudio.Product.BuildTools",
-                // ...
-            ]
-        },
-        // ...
+        // Other keys and values...
     },
-    // ...
-}
+    // Other packages...
+]
 ```
 
-Explanation for most of the keys:
+There are many keys in a package but the most important ones are:
 
 - `id`: The package id that can be referred by other packages (as dependency). Package id should be treated as case-insensitive string because the case of dependency id and package id may not always match. However, because Python `dict` key is case-sensitive, then we should overload/modify the `dict` class to treat key as case-insensitive. Some dependencies may also refer to its own parent id so this situation can create endless loop if not checked properly.
 - `version`: Version in package is always written as exact version, but if the version is written as dependency then it could also be a range (e.g. `[1.0,2.0)`, `[2.0,]`). If version is written as dependency requirement, it doesn't mean to match the package version, but rather it should match VS build tools version.
