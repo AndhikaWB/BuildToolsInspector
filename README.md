@@ -20,8 +20,10 @@ Originally, I only needed the build tools because it is required by Flutter. I d
 - Remove unneeded packages or add packages that are not included in workloads
 - Check package types, total files, and download size
 - Download and verify files checksum (or just export the details as `csv` and `json`)
-- Extract downloaded files for portable installation (currently support `vsix` and Windows SDK). Please modify `state.json` manually when moving root directory
-- Can be recognized by `vswhere` (will write some values to Windows registry)
+- Extract downloaded files for portable installation (currently support `vsix` and Windows SDK)
+- Can be recognized by `vswhere` (will write some values to Windows registry). Please modify path(s) on `state.json` manually when moving root directory
+
+**Note:** There are many variables that can be customized within the script. The most important ones are located at the beginning (`vs_package_extract`, `vs_package_win_sdk`, etc). Please include your variable modifications when posting issue so I can investigate it more easily.
 
 ### Todo
 |Status|Task|Comment|
