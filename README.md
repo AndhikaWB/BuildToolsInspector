@@ -4,7 +4,7 @@ Portable packages inspector (and downloader) for VS Build Tools.
 ### Why Did I Make This?
 Originally, I only needed the build tools because it is required by Flutter. I don't like installing VS directly because of its size and the installation is not fully transparent (will mess up my file associations, require admin rights, etc). So I tried [PortableBuildTools](https://github.com/Data-Oriented-House/PortableBuildTools), but it still doesn't meet the Flutter requirement and doesn't have much customization. I checked the Flutter doctor source code to see what's wrong and it's [more complicated than I thought](https://github.com/flutter/flutter/blob/master/packages/flutter_tools/lib/src/windows/visual_studio.dart).
 
-~~Currently, this tool still doesn't achieve what it's intended to do, but I think some people might want to check it. It consumes much of my free time so I'm not sure if I can finish it (especially the file extraction part). PR(s) are always welcome and I will see what I can do to help.~~ It's not perfect but it's done. PRs welcome.
+~~Currently, this tool still doesn't achieve what it's intended to do, but I think some people might want to check it. It consumes much of my free time so I'm not sure if I can finish it (especially the file extraction part). PR(s) are always welcome and I will see what I can do to help.~~ It's not perfect but it's done. PRs welcome, or open an issue if needed.
 
 ### Disclaimer
 - I don't know much about C/C++ and Visual Studio, all I care is to build a desktop app using Flutter (without installing Visual Studio)
@@ -24,6 +24,13 @@ Originally, I only needed the build tools because it is required by Flutter. I d
 - Can be recognized by `vswhere` (will write some values to Windows registry). Please modify path(s) on `state.json` manually when moving root directory
 
 **Note:** There are many variables that can be customized within the script. The most important ones are located at the beginning (`vs_package_extract`, `vs_package_win_sdk`, etc). Please include your variable modifications when posting issue so I can investigate it more easily.
+
+### Setup
+1. Install [Python](https://www.python.org/downloads/) and an IDE (I personally use [VS Code](https://code.visualstudio.com/download))
+2. Clone this repo and open it (the project folder) on your IDE
+3. Create a Conda or virtual environment if needed ([docs](https://code.visualstudio.com/docs/python/environments#_creating-environments))
+4. Install the required Python libraries using `pip install -r requirements.txt` (`conda install --file requirements.txt`)
+5. Open the [notebook](main.ipynb) and customize things, then run the notebook
 
 ### Todo
 |Status|Task|Comment|
